@@ -1,45 +1,73 @@
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
 plugins {
-	id 'org.springframework.boot' version '2.7.4'
-	id 'io.spring.dependency-management' version '1.0.14.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.7.4'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id 'java'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'com.hotdog'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = "17"
 
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+sourceSets {
+    main.java.srcDir querydslDir
+}
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    querydsl.extendsFrom compileClasspath
 }
 
+
+
+
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	//jpa
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	
 
-	//validation
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
+    //jpa
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    //querydsl
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 
-	//web
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+    //validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-	//lombok
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    //web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	//DB connector
-	runtimeOnly 'mysql:mysql-connector-java'
+    //lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
+    //DB connector
+    runtimeOnly 'mysql:mysql-connector-java'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
+targetCompatibility = JavaVersion.VERSION_18

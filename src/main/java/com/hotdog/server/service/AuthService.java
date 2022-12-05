@@ -6,20 +6,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hotdog.server.web.dto.TokenResponseDTO;
-import com.hotdog.server.web.dto.UserLoginFormDTO;
+import com.hotdog.server.domain.user.UserRepository;
+
 import com.hotdog.server.web.dto.UserRegisterFormDTO;
 import com.hotdog.server.web.dto.UserRegisterResponseDTO;
 import com.hotdog.server.exception.AuthException;
 import com.hotdog.server.domain.user.User;
-import com.hotdog.server.repository.UserRepository;
-import com.hotdog.server.security.jwt.JwtTokenProvider;
+
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class AuthService {
+
+	private final UserRepository userRepository;
+
 
 
 	@Transactional
@@ -30,8 +32,7 @@ public class AuthService {
 			.email(userRegisterFormDTO.getEmail())
 			.password(userRegisterFormDTO.getPassword())
 			.username(userRegisterFormDTO.getUsername())
-			.dog_breed(userRegisterFormDTO.getDog_breed())
-			.picture(userRegisterFormDTO.getPicture())
+			.coordinate(userRegisterFormDTO.getCoordinate())
 			.build();
 
 		User saveUser = userRepository.save(user);
