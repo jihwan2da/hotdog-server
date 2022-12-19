@@ -13,7 +13,7 @@ plugins {
 
 group = 'com.hotdog'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = "17"
+sourceCompatibility = "11"
 
 def querydslDir = "$buildDir/generated/querydsl"
 
@@ -70,4 +70,4 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
-targetCompatibility = JavaVersion.VERSION_18
+targetCompatibility = JavaVersion.VERSION_11
