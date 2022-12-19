@@ -18,6 +18,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserRegisterFormDTO {
+
+	private String uid;
+
 	@NotBlank(message = "유효하지 않은 강아지 이름입니다")
 	private String username;
 

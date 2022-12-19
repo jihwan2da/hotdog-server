@@ -30,6 +30,7 @@ public class AuthService {
 		validateDupliateUser(userRegisterFormDTO);
 
 		User user = User.builder()
+			.uid(userRegisterFormDTO.getUid())
 			.email(userRegisterFormDTO.getEmail())
 			.password(userRegisterFormDTO.getPassword())
 			.username(userRegisterFormDTO.getUsername())
