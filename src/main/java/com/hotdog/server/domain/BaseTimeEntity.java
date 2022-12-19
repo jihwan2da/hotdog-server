@@ -2,6 +2,7 @@ package com.hotdog.server.domain;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
@@ -16,9 +17,11 @@ import lombok.Getter;
 @Getter
 public abstract class BaseTimeEntity {
 	@CreatedDate
+	@Column(name = "created_date")
 	private LocalDateTime createdDate;
 
 	@LastModifiedDate
+	@Column(name = "modified_date")
 	private LocalDateTime modifiedDate;
 
 }
