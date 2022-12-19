@@ -3,8 +3,10 @@ package com.hotdog.server.domain;
 import java.util.function.LongPredicate;
 import java.util.stream.LongStream;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import com.hotdog.server.web.dto.CoordinateDto;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -29,11 +31,17 @@ public class Coordinate {
 	/*
 	경도 : x
 	 */
+	@Column(name = "latitude")
 	private Double latitude;
 	/*
 	위도 : y
 	 */
+	@Column(name = "longitude")
 	private Double longitude;
+
+	public static Coordinate from(CoordinateDto coordinateDto) {
+		return new Coordinate(coordinateDto.getLatitude(), coordinateDto.getLatitude());
+	}
 
 
 
