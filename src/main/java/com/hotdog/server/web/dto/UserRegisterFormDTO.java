@@ -29,8 +29,6 @@ public class UserRegisterFormDTO {
 	private String email;
 
 	@NotBlank(message = "유효하지 않은 견종입니다")
-	private Coordinate coordinate;
-
-
+	private CoordinateDto coordinate;
 
 }
