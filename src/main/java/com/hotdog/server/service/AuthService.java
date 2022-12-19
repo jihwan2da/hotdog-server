@@ -2,6 +2,7 @@ package com.hotdog.server.service;
 
 import java.util.Optional;
 
+import com.hotdog.server.domain.Coordinate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +33,7 @@ public class AuthService {
 			.email(userRegisterFormDTO.getEmail())
 			.password(userRegisterFormDTO.getPassword())
 			.username(userRegisterFormDTO.getUsername())
-			.coordinate(userRegisterFormDTO.getCoordinate())
+			.coordinate(Coordinate.from(userRegisterFormDTO.getCoordinate()))
 			.build();
 
 		User saveUser = userRepository.save(user);
