@@ -27,6 +27,9 @@ public class User extends BaseTimeEntity {
 	@Column
 	private Long id;
 
+	@Column(name = "uid")
+	private String uid;
+
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 
