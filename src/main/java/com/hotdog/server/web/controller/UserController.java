@@ -4,10 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.hotdog.server.common.PageResponse;
 import com.hotdog.server.domain.user.User;
@@ -40,11 +37,11 @@ public class UserController {
 		return "access denied";
 	}
 
-	@PostMapping("/search")
+	@GetMapping("/search")
 	public ResponseEntity<PageResponse> search(
-		@RequestBody UserSearchRequestDTO searchRequestDTO,
+		@RequestParam(value = "uid") String uid,
 		@PageableDefault Pageable pageable) {
-		Page<UserDTO> userPage = userService.search(searchRequestDTO, pageable);
+		Page<UserDTO> userPage = userService.search(uid, pageable);
 		PageResponse<UserDTO> pageResponse = PageResponse.from(userPage);
 		return ResponseEntity.ok(pageResponse);
 	}

@@ -4,6 +4,8 @@ package com.hotdog.server.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.hotdog.server.domain.Coordinate;
+import com.hotdog.server.domain.user.handler.UserQueryHandler;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -25,9 +27,12 @@ import lombok.extern.slf4j.Slf4j;
 public class UserService {
 
 	private final UserRepository userRepository;
+	private final UserQueryHandler userQueryHandler;
 
-	public Page<UserDTO> search(UserSearchRequestDTO searchRequestDTO, Pageable pageable) {
-		var clientCoordinate = searchRequestDTO.getClientLocation();
+	public Page<UserDTO> search(String uid, Pageable pageable) {
+
+		User findUser = userQueryHandler.findByUid(uid);
+		Coordinate clientCoordinate = findUser.getCoordinate();
 
 		var vertex = clientCoordinate.getVertex();
 		UserSearch userSearch = UserSearch.builder()
