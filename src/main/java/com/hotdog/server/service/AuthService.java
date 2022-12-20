@@ -32,7 +32,6 @@ public class AuthService {
 		User user = User.builder()
 			.uid(userRegisterFormDTO.getUid())
 			.email(userRegisterFormDTO.getEmail())
-			.password(userRegisterFormDTO.getPassword())
 			.username(userRegisterFormDTO.getUsername())
 			.coordinate(Coordinate.from(userRegisterFormDTO.getCoordinate()))
 			.build();

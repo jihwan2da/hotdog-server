@@ -36,20 +36,16 @@ public class User extends BaseTimeEntity {
 	@Column(name = "username", nullable = false)
 	private String username;
 
-	@Column(name = "password", nullable = false)
-	private String password;
-
 	@Embedded
 	private Coordinate coordinate;
 
 
 
 	@Builder
-	public User(Long id, String uid, String email, String password, String username, Coordinate coordinate) {
+	public User(Long id, String uid, String email, String username, Coordinate coordinate) {
 		this.id = id;
 		this.uid = uid;
 		this.email = email;
-		this.password = password;
 		this.username = username;
 		this.coordinate = coordinate;
 	}

@@ -25,8 +25,6 @@ public class UserDTO {
 
 	private CoordinateDto coordinate;
 
-	private String password;
-
 	public static UserDTO fromEntity(User user) {
 		return new UserDTO(
 			user.getId(),
@@ -35,8 +33,7 @@ public class UserDTO {
 			new CoordinateDto(
 				user.getCoordinate().getLatitude(),
 				user.getCoordinate().getLongitude()
-			),
-			user.getPassword()
+			)
 		);
 	}
 
