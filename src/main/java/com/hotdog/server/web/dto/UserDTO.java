@@ -18,6 +18,7 @@ import lombok.Setter;
 public class UserDTO {
 
 	private Long id;
+	private String uid;
 
 	private String username;
 
@@ -28,6 +29,7 @@ public class UserDTO {
 	public static UserDTO fromEntity(User user) {
 		return new UserDTO(
 			user.getId(),
+			user.getUid(),
 			user.getUsername(),
 			user.getEmail(),
 			new CoordinateDto(
